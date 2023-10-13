@@ -1,0 +1,28 @@
+name: Docker Build and Test
+
+on:
+  push:
+    branches:
+      - main # ajuste conforme necessário
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: actions/setup-docker@v2
+      with:
+        dockerfile: Dockerfile
+
+    - name: Build Docker Image
+      run: docker build -t todolist:latest .
+
+    - name: Test Docker Image
+      run: |
+        docker run todolist:latest java -jar /app.jar --version
+
+    - name: Push Docker Image
