@@ -18,5 +18,9 @@ jobs:
     - name: Build and Test Docker Image
       run: |
         docker build -t todolist:latest .
-        docker run todolist:latest java -jar /app.jar --version
+        docker run -d --name todolist-container todolist:latest java -jar /app.jar --version
 
+    - name: Stop and Remove Docker Container
+      run: |
+       docker stop todolist-container
+       docker rm todolist-container
