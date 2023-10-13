@@ -22,7 +22,4 @@ jobs:
       run: docker build -t todolist:latest .
 
     - name: Test Docker Image
-      run: |
-        docker run todolist:latest java -jar /app.jar --version
-
-    - name: Push Docker Image
+      run: docker run todolist:latest java -jar /app.jar --version
